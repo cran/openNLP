@@ -1,0 +1,95 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+
+\newcommand{\strong}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}}
+\newcommand{\pkg}[1]{\strong{#1}}
+\newcommand{\proglang}[1]{\textsf{#1}}
+
+%% \VignetteIndexEntry{Introduction to the openNLP Package}
+
+\usepackage{/usr/local/lib/R/share/texmf/Sweave}
+\begin{document}
+\title{Introduction to the \pkg{openNLP} Package}
+\author{Ingo Feinerer}
+\maketitle
+\sloppy
+
+\begin{abstract}
+  The \pkg{openNLP} package.
+\end{abstract}
+
+\section*{Introduction}
+The \pkg{openNLP} package provides a \proglang{R} interface to
+\proglang{openNLP}\footnote{\url{http://opennlp.sourceforge.net/}}.
+
+\section*{Loading the Package}
+The package is loaded via
+\begin{Schunk}
+\begin{Sinput}
+> library("openNLP")
+\end{Sinput}
+\end{Schunk}
+
+\subsection*{Models}
+It is highly recommended to use the \pkg{openNLPmodels} package to
+provide the models necessary for full \pkg{openNLP} functionality.
+\begin{Schunk}
+\begin{Sinput}
+> library("openNLPmodels")
+\end{Sinput}
+\end{Schunk}
+This package provides default models both for English (\code{en}) and
+Spanish (\code{es}).
+
+\section*{Part-of-speech Tagging}
+\begin{Schunk}
+\begin{Sinput}
+> sentence <- "This is a short sentence consisting of
++              some nouns, verbs, and adjectives."
+> tagPOS(sentence, language = "en")
+\end{Sinput}
+\begin{Soutput}
+[1] "This/DT is/VBZ a/DT short/JJ sentence/NN consisting/VBG of/IN some/DT nouns,/JJ verbs,/NNS and/CC adjectives./VBG"
+\end{Soutput}
+\end{Schunk}
+
+\section*{Sentence Detection}
+\begin{Schunk}
+\begin{Sinput}
+> s <- "This is a sentence. This another---but with dash-like
++       structures, and some commas. Maybe another with question
++       marks? Sure!"
+> sentDetect(s, language = "en")
+\end{Sinput}
+\begin{Soutput}
+[1] "This is a sentence. "                                                  
+[2] "This another---but with dash-like\n      structures, and some commas. "
+[3] "Maybe another with question\n      marks? "                            
+[4] "Sure!"                                                                 
+\end{Soutput}
+\end{Schunk}
+
+\section*{Tokenizer}
+\begin{Schunk}
+\begin{Sinput}
+> s <- "¿Como se llama usted? El castellano es la lengua española oficial del Estado."
+> tokenize(s, language = "es")
+\end{Sinput}
+\begin{Soutput}
+ [1] "¿"          "Como"       "se"         "llama"      "usted"     
+ [6] "?"          "El"         "castellano" "es"         "la"        
+[11] "lengua"     "española"   "oficial"    "del"        "Estado"    
+[16] "."         
+\end{Soutput}
+\end{Schunk}
+
+\section*{Enhancements to tm}
+The package provides transformations to enhance the \pkg{tm}
+package. The functions \code{tmTagPOS}, \code{tmSentDetect}, and
+\code{tmTokenize} are wrappers for above functions to be applied to
+plain text documents.
+
+\end{document}

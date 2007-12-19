@@ -1,0 +1,9 @@
+import(methods)
+import(tm)
+
+export("sentDetect",
+       "tagPOS",
+       "tmSentDetect",
+       "tmTagPOS",
+       "tmTokenize",
+       "tokenize")
