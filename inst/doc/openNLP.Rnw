@@ -43,10 +43,15 @@ This package provides default models both for English (\code{en}) and
 Spanish (\code{es}).
 
 \section*{Part-of-speech Tagging}
-<<keep.source=TRUE>>=
+<<eval=FALSE,keep.source=TRUE>>=
 sentence <- "This is a short sentence consisting of
              some nouns, verbs, and adjectives."
 tagPOS(sentence, language = "en")
+@
+<<echo=FALSE,keep.source=TRUE>>=
+sentence <- "This is a short sentence consisting of
+             some nouns, verbs, and adjectives."
+strwrap(tagPOS(sentence, language = "en"))
 @
 
 \section*{Sentence Detection}
