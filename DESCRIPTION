@@ -1,19 +1,20 @@
 Package: openNLP
 Title: openNLP Interface
-Version: 0.0-6
-Date: 2008-04-11
-Author: Ingo Feinerer
-Maintainer: Ingo Feinerer <h0125130@wu-wien.ac.at>
-Depends: methods, rJava (>= 0.5-0)
-Imports: tm
+Version: 0.0-7
+Date: 2009-06-27
+Author: Ingo Feinerer, Kurt Hornik
+Maintainer: Kurt Hornik <Kurt.Hornik@R-project.org>
+Imports: methods, rJava (>= 0.6-3), tm
 Enhances: tm
-Suggests: openNLPmodels
+Suggests: openNLPmodels.en, openNLPmodels.es
 SystemRequirements: Java (>= 5.0)
 Description: An interface to openNLP (http://opennlp.sourceforge.net/),
-  a collection of natural language processing tools including a sentence
-  detector, tokenizer, pos-tagger, shallow and full syntactic parser, and
-  named-entity detector, using the Maxent Java package for training and
-  using maximum entropy models.
+        a collection of natural language processing tools including a
+        sentence detector, tokenizer, pos-tagger, shallow and full
+        syntactic parser, and named-entity detector, using the Maxent
+        Java package for training and using maximum entropy models.
 License: LGPL-2.1
 Encoding: UTF-8
-Packaged: Mon Apr 14 09:37:37 2008; hornik
+Packaged: 2009-06-27 08:52:37 UTC; hornik
+Repository: CRAN
+Date/Publication: 2009-06-27 09:04:36

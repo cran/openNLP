@@ -16,7 +16,7 @@ Methods for function \code{tmSentDetect} in package \pkg{openNLP}.
 \examples{
 if(!require("tm")) stop("could not load tm package")
 data("crude")
-crude[[1]]
-tmSentDetect(crude[[1]])
+crude[[1L]]
+tmSentDetect(crude[[1L]])
 }
 \keyword{methods}

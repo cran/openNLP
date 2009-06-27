@@ -1,5 +1,5 @@
-.onLoad <- function(libname, pkgname) {
-    require("methods")
-    require("rJava")
-    .jpackage(pkgname)
+.onLoad <-
+function(libname, pkgname)
+{
+    .jpackage(pkgname, lib.loc = libname)
 }
