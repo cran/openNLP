@@ -8,26 +8,30 @@
 tagPOS(sentence, language = "en", model = NULL, tagdict = NULL)
 }
 \arguments{
-  \item{sentence}{A character vector to get POS-tagged.}
+  \item{sentence}{A character vector with sentences to get POS-tagged.}
   \item{model}{A model.}
-  \item{language}{A character vector giving \code{sentence}'s language. This
-    argument is only used if \code{model} is \code{NULL} for selecting a
-    default model. At the moment only \code{en} (English) and \code{es}
-    (Spanish) are supported.}
+  \item{language}{A character vector giving the language of
+    \code{sentence}.
+    This argument is only used if \code{model} is \code{NULL} for
+    selecting a default model.
+    At the moment, languages \samp{en} (English), \samp{es} (Spanish),
+    \samp{de} (German) and \samp{th} (Thai) are supported, provided that
+    the corresponding openNLP model language packages
+    (\pkg{openNLPmodels.en}, \dots) are available.}
   \item{tagdict}{A tag dictionary.}
 }
 \details{
-  If \code{model} is \code{NULL} then a default model for English or
-  Spanish part-of-speech tagging from the \pkg{openNLPmodels} is loaded. If
-  \code{tagdict} is \code{NULL} a default English tag dictionary is
+  If \code{model} is \code{NULL} then a default model for sentence
+  detection is loaded from the corresponding openNLP models language
+  package.
+  If \code{tagdict} is \code{NULL} a default English tag dictionary is
   taken.
 }
 \value{
   A character vector holding POS-tagged \code{sentence}.
 }
 \references{
-  OpenNLP.
-  \url{http://opennlp.sourceforge.net/}
+  OpenNLP \url{http://opennlp.sourceforge.net/}
 }
 \author{Ingo Feinerer}
 \examples{

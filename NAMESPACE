@@ -1,5 +1,6 @@
-import(methods)
-import(tm)
+import("methods")
+import("rJava")
+import("tm")
 
 export("sentDetect",
        "tagPOS",

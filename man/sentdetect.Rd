@@ -8,23 +8,27 @@
 sentDetect(s, language = "en", model = NULL)
 }
 \arguments{
-  \item{s}{A character vector where the sentences should be detected.}
-  \item{language}{A character vector giving \code{s}'s language. This
-    argument is only used if \code{model} is \code{NULL} for selecting a
-    default model. At the moment only \code{en} (English) and \code{es}
-    (Spanish) are supported.}
+  \item{s}{A character vector with texts from which sentences should be
+    detected.}
+  \item{language}{A character string giving the language of \code{s}.
+    This argument is only used if \code{model} is \code{NULL} for
+    selecting a default model.
+    At the moment, languages \samp{en} (English), \samp{es} (Spanish),
+    \samp{de} (German) and \samp{th} (Thai) are supported, provided that
+    the corresponding openNLP model language packages
+    (\pkg{openNLPmodels.en}, \dots) are available.}
   \item{model}{A model.}
 }
 \details{
-  If \code{model} is \code{NULL} then a default model for detection of
-  English or Spanish sentences from the \pkg{openNLPmodels} is loaded.
+  If \code{model} is \code{NULL} then a default model for sentence
+  detection is loaded from the corresponding openNLP models language
+  package.
 }
 \value{
   A character vector resulting from sentence detection in \code{s}.
 }
 \references{
-  OpenNLP.
-  \url{http://opennlp.sourceforge.net/}
+  OpenNLP \url{http://opennlp.sourceforge.net/}
 }
 \author{Ingo Feinerer}
 \examples{

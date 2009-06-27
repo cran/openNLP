@@ -16,7 +16,7 @@ Methods for function \code{tmTagPOS} in package \pkg{openNLP}.
 \examples{
 if(!require("tm")) stop("could not load tm package")
 data("crude")
-crude[[1]]
-tmTagPOS(crude[[1]])
+crude[[1L]]
+tmTagPOS(crude[[1L]])
 }
 \keyword{methods}
