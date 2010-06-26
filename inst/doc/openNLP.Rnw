@@ -49,7 +49,8 @@ installed, but not loaded.
 
 At least the model language packages for English and Spanish, previously
 contained in a single \pkg{openNLPmodels} package, are available from
-\textsc{CRAN}.
+\textsc{CRAN}.  Other model language packages are available from
+\url{http://datacube.wu.ac.at/src/contrib/}.
   
 \section*{Using the Package}
 
