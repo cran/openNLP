@@ -10,7 +10,7 @@ tagPOS(sentence, language = "en", model = NULL, tagdict = NULL)
 \arguments{
   \item{sentence}{A character vector with sentences to get POS-tagged.}
   \item{model}{A model.}
-  \item{language}{A character vector giving the language of
+  \item{language}{A character string giving the language of
     \code{sentence}.
     This argument is only used if \code{model} is \code{NULL} for
     selecting a default model.

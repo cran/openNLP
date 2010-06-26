@@ -24,7 +24,8 @@ tokenize(s, language = "en", model = NULL)
   package.
 }
 \value{
-  A character vector holding the tokenized \code{s}.
+  A character vector with all the tokens found in the elements of
+  \code{s}.
 }
 \references{
   OpenNLP \url{http://opennlp.sourceforge.net/}

@@ -1,7 +1,7 @@
 Package: openNLP
 Title: openNLP Interface
-Version: 0.0-7
-Date: 2009-06-27
+Version: 0.0-8
+Date: 2010-06-26
 Author: Ingo Feinerer, Kurt Hornik
 Maintainer: Kurt Hornik <Kurt.Hornik@R-project.org>
 Imports: methods, rJava (>= 0.6-3), tm
@@ -15,6 +15,6 @@ Description: An interface to openNLP (http://opennlp.sourceforge.net/),
         Java package for training and using maximum entropy models.
 License: LGPL-2.1
 Encoding: UTF-8
-Packaged: 2009-06-27 08:52:37 UTC; hornik
+Packaged: 2010-06-26 19:52:00 UTC; hornik
 Repository: CRAN
-Date/Publication: 2009-06-27 09:04:36
+Date/Publication: 2010-06-26 20:04:13
