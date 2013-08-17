@@ -1,4 +1,4 @@
-ME_Sent_Token_Annotator <-
+ME_POS_Tag_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
     description <- if(is.null(model)) {
@@ -8,7 +8,7 @@ function(language = "en", probs = FALSE, model = NULL)
         else
             sprintf("openNLPmodels.%s", language)
         model <- system.file("models",
-                             sprintf("%s-sent.bin", language),
+                             sprintf("%s-pos-maxent.bin", language),
                              package = package)
         if(model == "") {
             msg <-
@@ -24,37 +24,30 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing the default model for language '%s'.",
+        sprintf("Computes POS tag annotations using the Apache OpenNLP Maxent Part of Speech tagger employing the default model for language '%s'.",
                 language)
     }
     else
-        "Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing a user-defined model."
+        "Computes POS tag annotations using the Apache OpenNLP Maxent Part of Speech tagger employing a user-defined model."
 
     ## See
-    ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.sentdetect.detection.api
+    ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.postagger.tagging.api
 
-    ref <- .jnew("opennlp.tools.sentdetect.SentenceDetectorME",
-                 .jnew("opennlp.tools.sentdetect.SentenceModel",
+    ref <- .jnew("opennlp.tools.postag.POSTaggerME",
+                 .jnew("opennlp.tools.postag.POSModel",
                        .jcast(.jnew("java.io.FileInputStream", model),
                               "java.io.InputStream")))
 
     f <- function(x) {
-        y <- .jcall(ref,
-                    "[Lopennlp/tools/util/Span;",
-                    "sentPosDetect",
-                    x)
-        start <- sapply(y, .jcall, "I", "getStart") + 1L
-        end <- sapply(y, .jcall, "I", "getEnd")
+        tags <- .jcall(ref, "[S", "tag", .jarray(x))
         if(probs) {
-            probs <- .jcall(ref, "[D", "getSentenceProbabilities")
-            Annotation(NULL,
-                       rep.int("sentence", length(start)),
-                       start,
-                       end,
-                       .simple_feature_map(probs, "prob"))
-        } else 
-            Span(start, end)
+            probs <- .jcall(ref, "[D", "probs")
+            Map(c,
+                .simple_feature_map(tags, "POS"),
+                .simple_feature_map(probs, "POS_prob"))
+        } else
+            tags
     }
 
-    Simple_Sent_Token_Annotator(f, description)
+    Simple_POS_Tag_Annotator(f, description)
 }

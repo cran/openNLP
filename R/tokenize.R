@@ -1,4 +1,4 @@
-ME_Sent_Token_Annotator <-
+ME_Word_Token_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
     description <- if(is.null(model)) {
@@ -8,7 +8,7 @@ function(language = "en", probs = FALSE, model = NULL)
         else
             sprintf("openNLPmodels.%s", language)
         model <- system.file("models",
-                             sprintf("%s-sent.bin", language),
+                             sprintf("%s-token.bin", language),
                              package = package)
         if(model == "") {
             msg <-
@@ -24,31 +24,28 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing the default model for language '%s'.",
+        sprintf("Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing the default model for language '%s'.",
                 language)
     }
     else
-        "Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing a user-defined model."
+        "Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing a user-defined model."
 
     ## See
-    ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.sentdetect.detection.api
+    ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.tokenizer.api
 
-    ref <- .jnew("opennlp.tools.sentdetect.SentenceDetectorME",
-                 .jnew("opennlp.tools.sentdetect.SentenceModel",
+    ref <- .jnew("opennlp.tools.tokenize.TokenizerME",
+                 .jnew("opennlp.tools.tokenize.TokenizerModel",
                        .jcast(.jnew("java.io.FileInputStream", model),
                               "java.io.InputStream")))
 
     f <- function(x) {
-        y <- .jcall(ref,
-                    "[Lopennlp/tools/util/Span;",
-                    "sentPosDetect",
-                    x)
+        y <- .jcall(ref, "[Lopennlp/tools/util/Span;", "tokenizePos", x)
         start <- sapply(y, .jcall, "I", "getStart") + 1L
         end <- sapply(y, .jcall, "I", "getEnd")
         if(probs) {
-            probs <- .jcall(ref, "[D", "getSentenceProbabilities")
+            probs <- .jcall(ref, "[D", "getTokenProbabilities")
             Annotation(NULL,
-                       rep.int("sentence", length(start)),
+                       rep.int("word", length(start)),
                        start,
                        end,
                        .simple_feature_map(probs, "prob"))
@@ -56,5 +53,5 @@ function(language = "en", probs = FALSE, model = NULL)
             Span(start, end)
     }
 
-    Simple_Sent_Token_Annotator(f, description)
+    Simple_Word_Token_Annotator(f, description)
 }

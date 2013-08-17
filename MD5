@@ -1,0 +1,15 @@
+7b8ff51a1d08c1392b767770ef1d6c03 *DESCRIPTION
+acaa73480b9506addd3564dbb2e6a300 *NAMESPACE
+ef388629a4cdeadb99b3fa79c173a623 *R/chunk.R
+a917a702d5a5a15a6960bdf6c9048101 *R/ner.R
+2a6d6a475fcc62d040d7558be7dd75b2 *R/parse.R
+b93713819da839ccb3502525689750bc *R/pos.R
+ef9a7c8ac58710d8f84b88330093d01a *R/sentdetect.R
+29671319e4a5b41960aa966944a9ca61 *R/tokenize.R
+5e71447c9614b89ed60ea4ca9ea47f6f *R/utils.R
+17a0a45649552b6bba1e00967a48b6d1 *man/ME_Chunk_Annotator.Rd
+05dbe41a0462ace88bc0c16f2d775329 *man/ME_Entity_Annotator.Rd
+b73dd7d87fee3706e456e0bd97b5d080 *man/ME_POS_Tag_Annotator.Rd
+03924b73d2eefb01a8f91043b4b03610 *man/ME_Sent_Token_Annotator.Rd
+8c69d225521ae1aed0476bb8334b35d8 *man/ME_Word_Token_Annotator.Rd
+ca6345be639e509c53c9858bbf34a188 *man/Parse_Annotator.Rd

@@ -1,10 +1,17 @@
-import("methods")
-import("rJava")
-import("tm")
+import("openNLPdata")
+importFrom("NLP",
+           "Annotation", "Annotator", "Span", "annotations_in_spans",
+           "Simple_Sent_Token_Annotator",
+           "Simple_Word_Token_Annotator",
+           "Simple_POS_Tag_Annotator",
+           "Simple_Entity_Annotator",
+           "Simple_Chunk_Annotator")
+importFrom("rJava",
+           ".jarray", ".jcast", ".jcall", ".jfield", ".jnew")
 
-export("sentDetect",
-       "tagPOS",
-       "tmSentDetect",
-       "tmTagPOS",
-       "tmTokenize",
-       "tokenize")
+export("ME_Sent_Token_Annotator",
+       "ME_Word_Token_Annotator",
+       "ME_POS_Tag_Annotator",
+       "ME_Entity_Annotator",
+       "ME_Chunk_Annotator",
+       "Parse_Annotator")
