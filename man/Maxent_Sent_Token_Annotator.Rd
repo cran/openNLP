@@ -1,12 +1,12 @@
-\name{ME_Word_Token_Annotator}
-\alias{ME_Word_Token_Annotator}
-\title{Apache OpenNLP based word token annotators}
+\name{Maxent_Sent_Token_Annotator}
+\alias{Maxent_Sent_Token_Annotator}
+\title{Apache OpenNLP based sentence token annotators}
 \description{
-  Generate an annotator which computes word token annotations using the
-  Apache OpenNLP Maxent tokenizer.
+  Generate an annotator which computes sentence annotations using the
+  Apache OpenNLP Maxent sentence detector.   
 }
 \usage{
-ME_Word_Token_Annotator(language = "en", probs = FALSE, model = NULL)
+Maxent_Sent_Token_Annotator(language = "en", probs = FALSE, model = NULL)
 }
 \arguments{
   \item{language}{
@@ -25,8 +25,8 @@ ME_Word_Token_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created word token
-  annotator.
+  An \code{\link[NLP]{Annotator}} object giving the created sentence
+  token annotator.
 }
 \details{
   See \url{http://opennlp.sourceforge.net/models-1.5/} for available
@@ -50,18 +50,12 @@ s <- paste(c("Pierre Vinken, 61 years old, will join the board as a ",
            collapse = "")
 s <- as.String(s)
 
-## Need sentence token annotations.
-sent_token_annotator <- ME_Sent_Token_Annotator()
+sent_token_annotator <- Maxent_Sent_Token_Annotator()
+sent_token_annotator
 a1 <- annotate(s, sent_token_annotator)
-
-word_token_annotator <- ME_Word_Token_Annotator()
-word_token_annotator
-a2 <- annotate(s, word_token_annotator, a1)
-a2
-## Variant with word token probabilities as features.
-head(annotate(s, ME_Word_Token_Annotator(probs = TRUE), a1))
-
-## Can also perform sentence and word token annotations in a pipeline:
-a <- annotate(s, list(sent_token_annotator, word_token_annotator))
-head(a)
+a1
+## Extract sentences.
+s[a1]
+## Variant with sentence probabilities as features.
+annotate(s, Maxent_Sent_Token_Annotator(probs = TRUE))
 }

@@ -1,7 +1,18 @@
-ME_Sent_Token_Annotator <-
+Maxent_Sent_Token_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
-    description <- if(is.null(model)) {
+    f <- Maxent_Simple_Sent_Tokenizer(language, probs, model)
+    description <-
+        sprintf("Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing %s.",
+                environment(f)$info)
+    
+    Simple_Sent_Token_Annotator(f, description)
+}
+
+Maxent_Simple_Sent_Tokenizer <-
+function(language = "en", probs = FALSE, model = NULL)
+{
+    info <- if(is.null(model)) {
         language <- match.arg(language, openNLP_languages)
         package <- if(language == "en")
             "openNLPdata"
@@ -24,21 +35,21 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing the default model for language '%s'.",
-                language)
+        sprintf("the default model for language '%s'", language)
     }
     else
-        "Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing a user-defined model."
+        "a user-defined model"
 
     ## See
     ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.sentdetect.detection.api
 
-    ref <- .jnew("opennlp.tools.sentdetect.SentenceDetectorME",
-                 .jnew("opennlp.tools.sentdetect.SentenceModel",
-                       .jcast(.jnew("java.io.FileInputStream", model),
-                              "java.io.InputStream")))
+    model <- .jnew("opennlp.tools.sentdetect.SentenceModel",
+                   .jcast(.jnew("java.io.FileInputStream", model),
+                          "java.io.InputStream"))
 
-    f <- function(x) {
+    ref <- .jnew("opennlp.tools.sentdetect.SentenceDetectorME", model)
+
+    function(x) {
         y <- .jcall(ref,
                     "[Lopennlp/tools/util/Span;",
                     "sentPosDetect",
@@ -55,6 +66,5 @@ function(language = "en", probs = FALSE, model = NULL)
         } else 
             Span(start, end)
     }
-
-    Simple_Sent_Token_Annotator(f, description)
+    
 }

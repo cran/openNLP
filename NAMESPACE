@@ -7,11 +7,12 @@ importFrom("NLP",
            "Simple_Entity_Annotator",
            "Simple_Chunk_Annotator")
 importFrom("rJava",
-           ".jarray", ".jcast", ".jcall", ".jfield", ".jnew")
+           ".jarray", ".jcast", ".jcall", ".jfield", ".jnew",
+           ".jsimplify")
 
-export("ME_Sent_Token_Annotator",
-       "ME_Word_Token_Annotator",
-       "ME_POS_Tag_Annotator",
-       "ME_Entity_Annotator",
-       "ME_Chunk_Annotator",
+export("Maxent_Sent_Token_Annotator",
+       "Maxent_Word_Token_Annotator",
+       "Maxent_POS_Tag_Annotator",
+       "Maxent_Entity_Annotator",
+       "Maxent_Chunk_Annotator",
        "Parse_Annotator")

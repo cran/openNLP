@@ -1,22 +1,27 @@
-\name{ME_Chunk_Annotator}
-\alias{ME_Chunk_Annotator}
-\title{Apache OpenNLP based chunk annotators}
+\name{Maxent_Entity_Annotator}
+\alias{Maxent_Entity_Annotator}
+\title{Apache OpenNLP based entity annotators}
 \description{
-  Generate an annotator which computes chunk annotations using the
-  Apache OpenNLP Maxent chunker.
+  Generate an annotator which computes entity annotations using the
+  Apache OpenNLP Maxent name finder.
 }
 \usage{
-ME_Chunk_Annotator(language = "en", probs = FALSE, model = NULL)
+Maxent_Entity_Annotator(language = "en", kind = "person", probs = FALSE,
+                        model = NULL)
 }
 \arguments{
   \item{language}{
     a character string giving the ISO-639 code of the language being
     processed by the annotator.
   }
+  \item{kind}{
+    a character string giving the \sQuote{kind} of entity to be
+    annotated (person, date, \dots).
+  }
   \item{probs}{
     a logical indicating whether the computed annotations should provide
     the token probabilities obtained from the Maxent model as their
-    \sQuote{chunk_prob} feature.
+    \sQuote{prob} feature.
   }
   \item{model}{
     a character string giving the path to the Maxent model file to be
@@ -25,7 +30,7 @@ ME_Chunk_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created chunk
+  An \code{\link[NLP]{Annotator}} object giving the created entity
   annotator.
 }
 \details{
@@ -52,16 +57,20 @@ s <- paste(c("Pierre Vinken, 61 years old, will join the board as a ",
            collapse = "")
 s <- as.String(s)
 
-## Chunking needs word token annotations with POS tags.
-sent_token_annotator <- ME_Sent_Token_Annotator()
-word_token_annotator <- ME_Word_Token_Annotator()
-pos_tag_annotator <- ME_POS_Tag_Annotator()
-a3 <- annotate(s,
-               list(sent_token_annotator,
-                    word_token_annotator,
-                    pos_tag_annotator))
+## Need sentence and word token annotations.
+sent_token_annotator <- Maxent_Sent_Token_Annotator()
+word_token_annotator <- Maxent_Word_Token_Annotator()
+a2 <- annotate(s, list(sent_token_annotator, word_token_annotator))
 
-annotate(s, ME_Chunk_Annotator(), a3)
-annotate(s, ME_Chunk_Annotator(probs = TRUE), a3)
+## Entity recognition for persons.
+entity_annotator <- Maxent_Entity_Annotator()
+entity_annotator
+annotate(s, entity_annotator, a2)
+## Directly:
+entity_annotator(s, a2)
+## And slice ...
+s[entity_annotator(s, a2)]
+## Variant with sentence probabilities as features.
+annotate(s, Maxent_Entity_Annotator(probs = TRUE), a2)
 }
 }

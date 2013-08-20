@@ -1,7 +1,18 @@
-ME_Word_Token_Annotator <-
+Maxent_Word_Token_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
-    description <- if(is.null(model)) {
+    f <- Maxent_Simple_Word_Tokenizer(language, probs, model)
+    description <-
+        sprintf("Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing %s.",
+                environment(f)$info)
+
+    Simple_Word_Token_Annotator(f, description)
+}
+
+Maxent_Simple_Word_Tokenizer <-    
+function(language = "en", probs = FALSE, model = NULL)
+{
+    info <- if(is.null(model)) {
         language <- match.arg(language, openNLP_languages)
         package <- if(language == "en")
             "openNLPdata"
@@ -24,21 +35,21 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing the default model for language '%s'.",
-                language)
+        sprintf("the default model for language '%s'.", language)
     }
     else
-        "Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing a user-defined model."
+        "a user-defined model."
 
     ## See
     ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.tokenizer.api
 
-    ref <- .jnew("opennlp.tools.tokenize.TokenizerME",
-                 .jnew("opennlp.tools.tokenize.TokenizerModel",
-                       .jcast(.jnew("java.io.FileInputStream", model),
-                              "java.io.InputStream")))
+    model <- .jnew("opennlp.tools.tokenize.TokenizerModel",
+                   .jcast(.jnew("java.io.FileInputStream", model),
+                          "java.io.InputStream"))
 
-    f <- function(x) {
+    ref <- .jnew("opennlp.tools.tokenize.TokenizerME", model)
+
+    function(x) {
         y <- .jcall(ref, "[Lopennlp/tools/util/Span;", "tokenizePos", x)
         start <- sapply(y, .jcall, "I", "getStart") + 1L
         end <- sapply(y, .jcall, "I", "getEnd")
@@ -53,5 +64,4 @@ function(language = "en", probs = FALSE, model = NULL)
             Span(start, end)
     }
 
-    Simple_Word_Token_Annotator(f, description)
 }
