@@ -1,7 +1,18 @@
-ME_Chunk_Annotator <-
+Maxent_Chunk_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
-    description <- if(is.null(model)) {
+    f <- Maxent_Simple_Chunker(language, probs, model)    
+    description <-
+        sprintf("Computes chunk annotations using the Apache OpenNLP Maxent chunker employing %s.",
+                environment(f)$info)
+
+    Simple_Chunk_Annotator(f, description)
+}
+
+Maxent_Simple_Chunker <-
+function(language = "en", probs = FALSE, model = NULL)    
+{
+    info <- if(is.null(model)) {
         language <- match.arg(language, openNLP_languages)
         package <- sprintf("openNLPmodels.%s", language)
         model <- system.file("models",
@@ -24,21 +35,21 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes chunk annotations using the Apache OpenNLP Maxent chunker employing the default model for language '%s'.",
-                language)
+        sprintf("the default model for language '%s'.", language)
     }
     else
-        "Computes chunk annotations using the Apache OpenNLP Maxent chunker employing a user-defined model."
+        "a user-defined model."
 
     ## See
     ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.parser.chunking.api
 
-    ref <- .jnew("opennlp.tools.chunker.ChunkerME",
-                 .jnew("opennlp.tools.chunker.ChunkerModel",
-                       .jcast(.jnew("java.io.FileInputStream", model),
-                              "java.io.InputStream")))
+    model <- .jnew("opennlp.tools.chunker.ChunkerModel",
+                   .jcast(.jnew("java.io.FileInputStream", model),
+                          "java.io.InputStream"))
 
-    f <- function(w, p) {
+    ref <- .jnew("opennlp.tools.chunker.ChunkerME", model)
+
+    function(w, p) {
         tags <- .jcall(ref, "[S", "chunk", .jarray(w), .jarray(p))
         if(probs) {
             probs <- .jcall(ref, "[D", "probs")
@@ -49,5 +60,4 @@ function(language = "en", probs = FALSE, model = NULL)
             tags
     }
 
-    Simple_Chunk_Annotator(f, description)
 }

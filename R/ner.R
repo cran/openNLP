@@ -1,7 +1,18 @@
-ME_Entity_Annotator <-
+Maxent_Entity_Annotator <-
 function(language = "en", kind = "person", probs = FALSE, model = NULL)
 {
-    description <- if(is.null(model)) {
+    f <- Maxent_Simple_Entity_Detector(language, kind, probs, model)
+    description <-
+        sprintf("Computes entity annotations using the Apache OpenNLP Maxent name finder employing %s.",
+                environment(f)$info)
+
+    Simple_Entity_Annotator(f, description)
+}
+    
+Maxent_Simple_Entity_Detector <-
+function(language = "en", kind = "person", probs = FALSE, model = NULL)    
+{
+    info <- if(is.null(model)) {
         language <- match.arg(language, openNLP_languages)
         ## <FIXME>
         ## Should this be called 'type' instead?
@@ -28,21 +39,22 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)            
         }
-        sprintf("Computes entity annotations using the Apache OpenNLP Maxent name finder employing the default model for language '%s' and kind '%s'.",
+        sprintf("the default model for language '%s' and kind '%s'.",
                 language, kind)
     }
     else
-        "Computes entity annotations using the Apache OpenNLP Maxent name finder employing a user-defined model."
+        "a user-defined model."
 
     ## See
     ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.namefind.recognition.api
 
-    ref <- .jnew("opennlp.tools.namefind.NameFinderME",
-                 .jnew("opennlp.tools.namefind.TokenNameFinderModel",
-                       .jcast(.jnew("java.io.FileInputStream", model),
-                              "java.io.InputStream")))
+    model <- .jnew("opennlp.tools.namefind.TokenNameFinderModel",
+                   .jcast(.jnew("java.io.FileInputStream", model),
+                          "java.io.InputStream"))
 
-    f <- function(x) {
+    ref <- .jnew("opennlp.tools.namefind.NameFinderME", model)
+
+    function(x) {
         y <- .jcall(ref, "[Lopennlp/tools/util/Span;", "find",
                     .jarray(x))
         y <- if(!length(y))
@@ -70,5 +82,4 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
         y
     }
 
-    Simple_Entity_Annotator(f, description)
 }

@@ -1,7 +1,18 @@
-ME_POS_Tag_Annotator <-
+Maxent_POS_Tag_Annotator <-
 function(language = "en", probs = FALSE, model = NULL)
 {
-    description <- if(is.null(model)) {
+    f <- Maxent_Simple_POS_Tagger(language, probs, model)
+    description <-
+        sprintf("Computes POS tag annotations using the Apache OpenNLP Maxent Part of Speech tagger employing %s",
+                environment(f)$info)
+
+    Simple_POS_Tag_Annotator(f, description)
+}
+    
+Maxent_Simple_POS_Tagger <-
+function(language = "en", probs = FALSE, model = NULL)    
+{
+    info <- if(is.null(model)) {
         language <- match.arg(language, openNLP_languages)
         package <- if(language == "en")
             "openNLPdata"
@@ -24,21 +35,21 @@ function(language = "en", probs = FALSE, model = NULL)
                       sep = "\n")
             stop(msg)
         }
-        sprintf("Computes POS tag annotations using the Apache OpenNLP Maxent Part of Speech tagger employing the default model for language '%s'.",
-                language)
+        sprintf("the default model for language '%s'.", language)
     }
     else
-        "Computes POS tag annotations using the Apache OpenNLP Maxent Part of Speech tagger employing a user-defined model."
+        "a user-defined model."
 
     ## See
     ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.postagger.tagging.api
 
-    ref <- .jnew("opennlp.tools.postag.POSTaggerME",
-                 .jnew("opennlp.tools.postag.POSModel",
-                       .jcast(.jnew("java.io.FileInputStream", model),
-                              "java.io.InputStream")))
+    model <- .jnew("opennlp.tools.postag.POSModel",
+                   .jcast(.jnew("java.io.FileInputStream", model),
+                          "java.io.InputStream"))
 
-    f <- function(x) {
+    ref <- .jnew("opennlp.tools.postag.POSTaggerME", model)
+
+    function(x) {
         tags <- .jcall(ref, "[S", "tag", .jarray(x))
         if(probs) {
             probs <- .jcall(ref, "[D", "probs")
@@ -49,5 +60,4 @@ function(language = "en", probs = FALSE, model = NULL)
             tags
     }
 
-    Simple_POS_Tag_Annotator(f, description)
 }

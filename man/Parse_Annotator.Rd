@@ -37,8 +37,8 @@ s <- paste(c("Pierre Vinken, 61 years old, will join the board as a ",
 s <- as.String(s)
 
 ## Need sentence and word token annotations.
-sent_token_annotator <- ME_Sent_Token_Annotator()
-word_token_annotator <- ME_Word_Token_Annotator()
+sent_token_annotator <- Maxent_Sent_Token_Annotator()
+word_token_annotator <- Maxent_Word_Token_Annotator()
 a2 <- annotate(s, list(sent_token_annotator, word_token_annotator))
 
 parse_annotator <- Parse_Annotator()
