@@ -25,7 +25,7 @@ Maxent_Sent_Token_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created sentence
+  An \code{\link[NLP]{Annotator}} object giving the generated sentence
   token annotator.
 }
 \details{

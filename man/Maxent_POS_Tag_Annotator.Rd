@@ -25,7 +25,7 @@ Maxent_POS_Tag_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created POS tag
+  An \code{\link[NLP]{Annotator}} object giving the generated POS tag
   annotator.
 }
 \details{

@@ -25,7 +25,7 @@ Maxent_Chunk_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created chunk
+  An \code{\link[NLP]{Annotator}} object giving the generated chunk
   annotator.
 }
 \details{

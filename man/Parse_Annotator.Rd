@@ -9,11 +9,11 @@
 Parse_Annotator()
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created parse
+  An \code{\link[NLP]{Annotator}} object giving the generated parse
   annotator.
 }
 \details{
-  Using the created annotator requires installing package
+  Using the generated annotator requires installing package
   \pkg{openNLPmodels.en} from the repository at
   \url{http://datacube.wu.ac.at} (which provides the Maxent model file
   used by the parser).
@@ -44,7 +44,11 @@ a2 <- annotate(s, list(sent_token_annotator, word_token_annotator))
 parse_annotator <- Parse_Annotator()
 ## Compute the parse annotations only.
 p <- parse_annotator(s, a2)
-## Extract the treebanks.
-sapply(p$features, `[[`, "parse")
+## Extract the formatted parse trees.
+ptexts <- sapply(p$features, `[[`, "parse")
+ptexts
+## Read into NLP Tree objects.
+ptrees <- lapply(ptexts, Tree_parse)
+ptrees
 }
 }
