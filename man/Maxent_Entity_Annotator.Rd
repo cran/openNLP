@@ -30,7 +30,7 @@ Maxent_Entity_Annotator(language = "en", kind = "person", probs = FALSE,
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created entity
+  An \code{\link[NLP]{Annotator}} object giving the generated entity
   annotator.
 }
 \details{

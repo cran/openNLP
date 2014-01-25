@@ -9,13 +9,14 @@ function()
     model <- system.file("models/en-parser-chunking.bin",
                          package = package)
     if(model == "")
-        stop(gettextf("Could not find model file.\nPlease make sure package '%s' is installed,\navailable from http://datacube.wu.ac.at/.",
-                      package))
+        stop(gettextf("Could not find model file.\nPlease make sure package '%s' is installed,\navailable from <http://datacube.wu.ac.at/>.",
+                      package),
+             domain = NA)
     model <- .jnew("opennlp.tools.parser.ParserModel",
                    .jcast(.jnew("java.io.FileInputStream", model),
                           "java.io.InputStream"))
     ## Need to instantiate via ParserFactory, see
-    ## http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.parser
+    ## <http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.parser>.
     ref <- .jcall(.jnew("opennlp.tools.parser.ParserFactory"),
                   "Lopennlp/tools/parser/Parser;",
                   "create",
@@ -29,7 +30,7 @@ function()
             ## The "tricky" part is generating a parse tree from the
             ## sentence and word token spans first, see e.g.
             ## See
-            ## http://blog.dpdearing.com/2011/12/how-to-use-the-opennlp-1-5-0-parser/
+            ## <http://blog.dpdearing.com/2011/12/how-to-use-the-opennlp-1-5-0-parser/>.
             ## Note that it should be more efficient to do these
             ## computations directly in Java.
             t_inc <- .jfield("opennlp.tools.parser.AbstractBottomUpParser",

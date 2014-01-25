@@ -25,7 +25,7 @@ Maxent_Word_Token_Annotator(language = "en", probs = FALSE, model = NULL)
   }
 }
 \value{
-  An \code{\link[NLP]{Annotator}} object giving the created word token
+  An \code{\link[NLP]{Annotator}} object giving the generated word token
   annotator.
 }
 \details{
