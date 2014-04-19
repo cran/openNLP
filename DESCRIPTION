@@ -1,6 +1,6 @@
 Package: openNLP
 Encoding: UTF-8
-Version: 0.2-2
+Version: 0.2-3
 Title: Apache OpenNLP Tools Interface
 Authors@R: person("Kurt", "Hornik", role = c("aut", "cre"),
                   email = "Kurt.Hornik@R-project.org")
@@ -11,12 +11,14 @@ Description: An interface to the Apache OpenNLP tools (version 1.5.3).
   segmentation, part-of-speech tagging, named entity extraction, chunking,
   parsing, and coreference resolution.
   See <http://opennlp.apache.org/> for more information.
-Imports: NLP (>= 0.1-0), openNLPdata (>= 1.5.3-1), rJava (>= 0.6-3)
+Imports: NLP (>= 0.1-2), openNLPdata (>= 1.5.3-1), rJava (>= 0.6-3)
+Suggests: openNLPmodels.en
+Additional_repositories: http://datacube.wu.ac.at
 SystemRequirements: Java (>= 5.0)
 License: GPL-3
-Packaged: 2014-01-25 18:18:37 UTC; hornik
+Packaged: 2014-12-10 20:59:35 UTC; hornik
 Author: Kurt Hornik [aut, cre]
 Maintainer: Kurt Hornik <Kurt.Hornik@R-project.org>
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-01-25 19:24:08
+Date/Publication: 2014-12-10 22:01:24

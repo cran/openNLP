@@ -62,7 +62,7 @@ function(language = "en", probs = FALSE, model = NULL)
                        rep.int("sentence", length(start)),
                        start,
                        end,
-                       .simple_feature_map(probs, "prob"))
+                       lapply(probs, single_feature, "prob"))
         } else 
             Span(start, end)
     }

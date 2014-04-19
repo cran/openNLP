@@ -67,7 +67,7 @@ function()
         parses <- sapply(seq_along(at),
                          function(i) parse_sentence(as[i], at[[i]]))
 
-        as$features <- .simple_feature_map(parses, "parse")
+        as$features <- lapply(parses, single_feature, "parse")
 
         as
     }

@@ -54,8 +54,8 @@ function(language = "en", probs = FALSE, model = NULL)
         if(probs) {
             probs <- .jcall(ref, "[D", "probs")
             Map(c,
-                .simple_feature_map(tags, "chunk_tag"),
-                .simple_feature_map(probs, "chunk_prob"))
+                lapply(tags, single_feature, "chunk_tag"),
+                lapply(probs, single_feature, "chunk_prob"))
         } else
             tags
     }

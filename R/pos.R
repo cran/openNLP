@@ -54,8 +54,8 @@ function(language = "en", probs = FALSE, model = NULL)
         if(probs) {
             probs <- .jcall(ref, "[D", "probs")
             Map(c,
-                .simple_feature_map(tags, "POS"),
-                .simple_feature_map(probs, "POS_prob"))
+                lapply(tags, single_feature, "POS"),
+                lapply(probs, single_feature, "POS_prob"))
         } else
             tags
     }

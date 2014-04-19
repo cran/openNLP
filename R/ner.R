@@ -64,7 +64,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
             end <- sapply(y, .jcall, "I", "getEnd")
             kind <- sapply(y, .jcall, "S", "getType")
             type <- rep.int("entity", length(start))
-            features <- .simple_feature_map(kind, "kind")
+            features <- lapply(kind, single_feature, "kind")
             if(probs) {
                 ## Apparently need the probabilities for the obtained
                 ## spans, see
@@ -74,7 +74,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
                                        "[Lopennlp/tools/util/Span;"))
                 features <- Map(c,
                                 features,
-                                .simple_feature_map(probs, "prob"))
+                                lapply(probs, single_feature, "prob"))
             }
             Annotation(NULL, type, start, end, features)                
         }
