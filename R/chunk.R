@@ -12,8 +12,10 @@ function(language = "en", probs = FALSE, model = NULL)
 Maxent_Simple_Chunker <-
 function(language = "en", probs = FALSE, model = NULL)    
 {
+    force(language)
+    force(probs)
+    
     info <- if(is.null(model)) {
-        language <- match.arg(language, openNLP_languages)
         package <- sprintf("openNLPmodels.%s", language)
         model <- system.file("models",
                              sprintf("%s-chunker.bin", language),

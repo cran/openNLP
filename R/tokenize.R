@@ -12,8 +12,10 @@ function(language = "en", probs = FALSE, model = NULL)
 Maxent_Simple_Word_Tokenizer <-    
 function(language = "en", probs = FALSE, model = NULL)
 {
+    force(language)
+    force(probs)
+    
     info <- if(is.null(model)) {
-        language <- match.arg(language, openNLP_languages)
         package <- if(language == "en")
             "openNLPdata"
         else

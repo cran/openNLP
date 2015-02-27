@@ -1,6 +1,6 @@
 Package: openNLP
 Encoding: UTF-8
-Version: 0.2-3
+Version: 0.2-4
 Title: Apache OpenNLP Tools Interface
 Authors@R: person("Kurt", "Hornik", role = c("aut", "cre"),
                   email = "Kurt.Hornik@R-project.org")
@@ -16,9 +16,9 @@ Suggests: openNLPmodels.en
 Additional_repositories: http://datacube.wu.ac.at
 SystemRequirements: Java (>= 5.0)
 License: GPL-3
-Packaged: 2014-12-10 20:59:35 UTC; hornik
+Packaged: 2015-02-27 15:03:14 UTC; hornik
 Author: Kurt Hornik [aut, cre]
 Maintainer: Kurt Hornik <Kurt.Hornik@R-project.org>
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-12-10 22:01:24
+Date/Publication: 2015-02-27 18:11:57

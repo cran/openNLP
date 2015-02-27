@@ -1,6 +1,3 @@
-openNLP_languages <-
-    c("da", "de", "en", "es", "nl", "pt", "sv")
-
 read_tag_dictionary <-
 function(dict) {
     it <- dict$iterator()

@@ -12,8 +12,11 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
 Maxent_Simple_Entity_Detector <-
 function(language = "en", kind = "person", probs = FALSE, model = NULL)    
 {
+    force(language)
+    force(probs)
+    force(kind)
+    
     info <- if(is.null(model)) {
-        language <- match.arg(language, openNLP_languages)
         ## <NOTE>
         ## Alternatively could have used 'type' instead of 'kind' ...
         kind <- match.arg(kind,
