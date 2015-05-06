@@ -6,7 +6,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
         sprintf("Computes entity annotations using the Apache OpenNLP Maxent name finder employing %s.",
                 environment(f)$info)
 
-    Simple_Entity_Annotator(f, description)
+    Simple_Entity_Annotator(f, list(description = description))
 }
     
 Maxent_Simple_Entity_Detector <-

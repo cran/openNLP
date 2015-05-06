@@ -6,7 +6,7 @@ function(language = "en", probs = FALSE, model = NULL)
         sprintf("Computes sentence annotations using the Apache OpenNLP Maxent sentence detector employing %s.",
                 environment(f)$info)
     
-    Simple_Sent_Token_Annotator(f, description)
+    Simple_Sent_Token_Annotator(f, list(description = description))
 }
 
 Maxent_Simple_Sent_Tokenizer <-

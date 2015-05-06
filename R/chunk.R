@@ -6,7 +6,7 @@ function(language = "en", probs = FALSE, model = NULL)
         sprintf("Computes chunk annotations using the Apache OpenNLP Maxent chunker employing %s.",
                 environment(f)$info)
 
-    Simple_Chunk_Annotator(f, description)
+    Simple_Chunk_Annotator(f, list(description = description))
 }
 
 Maxent_Simple_Chunker <-

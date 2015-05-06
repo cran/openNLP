@@ -6,7 +6,7 @@ function(language = "en", probs = FALSE, model = NULL)
         sprintf("Computes word token annotations using the Apache OpenNLP Maxent tokenizer employing %s.",
                 environment(f)$info)
 
-    Simple_Word_Token_Annotator(f, description)
+    Simple_Word_Token_Annotator(f, list(description = description))
 }
 
 Maxent_Simple_Word_Tokenizer <-    

@@ -72,6 +72,8 @@ function()
         as
     }
 
-    Annotator(f,
-              "Computes Treebank parse annotations using the Apache OpenNLP chunking parser for English.")
+    description <-
+        "Computes Treebank parse annotations using the Apache OpenNLP chunking parser for English."
+
+    Annotator(f, list(description = description))
 }
