@@ -53,8 +53,8 @@ function(language = "en", probs = FALSE, model = NULL)
 
     function(x) {
         y <- .jcall(ref, "[Lopennlp/tools/util/Span;", "tokenizePos", x)
-        start <- sapply(y, .jcall, "I", "getStart") + 1L
-        end <- sapply(y, .jcall, "I", "getEnd")
+        start <- as.integer(sapply(y, .jcall, "I", "getStart")) + 1L
+        end <- as.integer(sapply(y, .jcall, "I", "getEnd"))
         if(probs) {
             probs <- .jcall(ref, "[D", "getTokenProbabilities")
             Annotation(NULL,

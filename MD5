@@ -1,11 +1,11 @@
-d8e16644c62552bb0528c7da70225494 *DESCRIPTION
+717ce99c971259ce47bd4ee7495757ae *DESCRIPTION
 fa71c2f07c5dbf87adbbbe1c8de2fc86 *NAMESPACE
 b4feeafe6f0a79582cbc5750d85ea1c2 *R/chunk.R
-695b4f0acb258ab37e26101eaa57db3d *R/ner.R
+5a07e698d16d7d36c642f119147ea2fc *R/ner.R
 eccc70849141b9f0399c1390941046b7 *R/parse.R
 4c0e1155afe56d2e941d4e164a1c9c95 *R/pos.R
-3e7363bbb2312e64de08ca8e86ce30b2 *R/sentdetect.R
-60c1627d44eecfd265ecbf9cd620e786 *R/tokenize.R
+48e6be7b64f092cacfcd6c92611aded0 *R/sentdetect.R
+029b6cccf849d7aef7b6ba10a4797841 *R/tokenize.R
 fea1f801f471ae15ff002629f9e515a3 *R/utils.R
 37af461caa9c7eaf4cdf18a7d6664a3f *man/Maxent_Chunk_Annotator.Rd
 ff64ee487ff8281ec6b1f6bafe4e9f09 *man/Maxent_Entity_Annotator.Rd

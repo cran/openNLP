@@ -63,9 +63,9 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
         y <- if(!length(y))
             Annotation()
         else {
-            start <- sapply(y, .jcall, "I", "getStart") + 1L
-            end <- sapply(y, .jcall, "I", "getEnd")
-            kind <- sapply(y, .jcall, "S", "getType")
+            start <- as.integer(sapply(y, .jcall, "I", "getStart")) + 1L
+            end <- as.integer(sapply(y, .jcall, "I", "getEnd"))
+            kind <- as.character(sapply(y, .jcall, "S", "getType"))
             type <- rep.int("entity", length(start))
             features <- lapply(kind, single_feature, "kind")
             if(probs) {

@@ -56,8 +56,8 @@ function(language = "en", probs = FALSE, model = NULL)
                     "[Lopennlp/tools/util/Span;",
                     "sentPosDetect",
                     x)
-        start <- sapply(y, .jcall, "I", "getStart") + 1L
-        end <- sapply(y, .jcall, "I", "getEnd")
+        start <- as.integer(sapply(y, .jcall, "I", "getStart")) + 1L
+        end <- as.integer(sapply(y, .jcall, "I", "getEnd"))
         if(probs) {
             probs <- .jcall(ref, "[D", "getSentenceProbabilities")
             Annotation(NULL,
