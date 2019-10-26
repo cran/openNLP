@@ -33,11 +33,11 @@ Maxent_Sent_Token_Annotator(language = "en", probs = FALSE, model = NULL)
   model files.  For languages other than English, these can conveniently
   be made available to \R by installing the respective
   \pkg{openNLPmodels.\var{language}} package from the repository at
-  \url{http://datacube.wu.ac.at}.  For English, no additional
+  \url{https://datacube.wu.ac.at}.  For English, no additional
   installation is required.
 }
 \seealso{
-  \url{http://opennlp.apache.org} for more information about Apache
+  \url{https://opennlp.apache.org} for more information about Apache
   OpenNLP.
 }
 \examples{

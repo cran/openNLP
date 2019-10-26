@@ -37,16 +37,16 @@ Maxent_Entity_Annotator(language = "en", kind = "person", probs = FALSE,
   See \url{http://opennlp.sourceforge.net/models-1.5/} for available
   model files.  These can conveniently be made available to \R by
   installing the respective \pkg{openNLPmodels.\var{language}} package
-  from the repository at \url{http://datacube.wu.ac.at}.
+  from the repository at \url{https://datacube.wu.ac.at}.
 }
 \seealso{
-  \url{http://opennlp.apache.org} for more information about Apache
+  \url{https://opennlp.apache.org} for more information about Apache
   OpenNLP.
 }
 \examples{
 \donttest{
 ## Requires package 'openNLPmodels.en' from the repository at
-## <http://datacube.wu.ac.at>.
+## <https://datacube.wu.ac.at>.
 
 require("NLP")
 ## Some text.

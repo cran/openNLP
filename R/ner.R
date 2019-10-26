@@ -33,7 +33,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
                 paste(gettextf("Could not find model file for language '%s' and kind '%s'.",
                                language, kind),
                       if(system.file(package = package) == "") {
-                          gettextf("Please make sure package '%s' is installed,\navailable from <http://datacube.wu.ac.at/>.",
+                          gettextf("Please make sure package '%s' is installed,\navailable from <https://datacube.wu.ac.at/>.",
                                    package)
                       } else {
                           gettextf("Apparently, package '%s' is installed\nbut does not provide this model.",
@@ -49,7 +49,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
         "a user-defined model"
 
     ## See
-    ## <http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.namefind.recognition.api>.
+    ## <https://opennlp.apache.org/docs/1.5.3/manual/opennlp.html#tools.namefind.recognition.api>.
 
     model <- .jnew("opennlp.tools.namefind.TokenNameFinderModel",
                    .jcast(.jnew("java.io.FileInputStream", model),
@@ -71,7 +71,7 @@ function(language = "en", kind = "person", probs = FALSE, model = NULL)
             if(probs) {
                 ## Apparently need the probabilities for the obtained
                 ## spans, see
-                ## <http://opennlp.apache.org/documentation/1.5.3/apidocs/opennlp-tools/index.html>.
+                ## <https://opennlp.apache.org/docs/1.5.3/apidocs/opennlp-tools/index.html>.
                 probs <- .jcall(ref, "[D", "probs",
                                 .jcast(.jarray(y),
                                        "[Lopennlp/tools/util/Span;"))

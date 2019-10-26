@@ -9,14 +9,14 @@ function()
     model <- system.file("models/en-parser-chunking.bin",
                          package = package)
     if(model == "")
-        stop(gettextf("Could not find model file.\nPlease make sure package '%s' is installed,\navailable from <http://datacube.wu.ac.at/>.",
+        stop(gettextf("Could not find model file.\nPlease make sure package '%s' is installed,\navailable from <https://datacube.wu.ac.at/>.",
                       package),
              domain = NA)
     model <- .jnew("opennlp.tools.parser.ParserModel",
                    .jcast(.jnew("java.io.FileInputStream", model),
                           "java.io.InputStream"))
     ## Need to instantiate via ParserFactory, see
-    ## <http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.parser>.
+    ## <https://opennlp.apache.org/docs/1.5.3/manual/opennlp.html#tools.parser>.
     ref <- .jcall(.jnew("opennlp.tools.parser.ParserFactory"),
                   "Lopennlp/tools/parser/Parser;",
                   "create",

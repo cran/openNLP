@@ -28,7 +28,7 @@ function(language = "en", probs = FALSE, model = NULL)
                 paste(gettextf("Could not find model file for language '%s'.",
                                language),
                       if(system.file(package = package) == "") {
-                          gettextf("Please make sure package '%s' is installed,\navailable from <http://datacube.wu.ac.at/>.",
+                          gettextf("Please make sure package '%s' is installed,\navailable from <https://datacube.wu.ac.at/>.",
                                    package)
                       } else {
                           gettextf("Apparently, package '%s' is installed\nbut does not provide this model.",
@@ -43,7 +43,7 @@ function(language = "en", probs = FALSE, model = NULL)
         "a user-defined model"
 
     ## See
-    ## <http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.tokenizer.api>.
+    ## <https://opennlp.apache.org/docs/1.5.3/manual/opennlp.html#tools.tokenizer.api>.
 
     model <- .jnew("opennlp.tools.tokenize.TokenizerModel",
                    .jcast(.jnew("java.io.FileInputStream", model),

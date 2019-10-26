@@ -15,17 +15,17 @@ Parse_Annotator()
 \details{
   Using the generated annotator requires installing package
   \pkg{openNLPmodels.en} from the repository at
-  \url{http://datacube.wu.ac.at} (which provides the Maxent model file
+  \url{https://datacube.wu.ac.at} (which provides the Maxent model file
   used by the parser).
 }
 \seealso{
-  \url{http://opennlp.apache.org} for more information about Apache
+  \url{https://opennlp.apache.org} for more information about Apache
   OpenNLP.
 }
 \examples{
 \donttest{
 ## Requires package 'openNLPmodels.en' from the repository at
-## <http://datacube.wu.ac.at>.
+## <https://datacube.wu.ac.at>.
 
 require("NLP")
 ## Some text.
